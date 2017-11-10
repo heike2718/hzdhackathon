@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="sqlite_jdbc-15fa784f004-36a50fec1596589" provider="generic" driver="sqlite_jdbc" name="SQLite - hackathon.db" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="/home/heike/git/hzdhackathon/zentralkomponente/hackathon.db" url="jdbc:sqlite:/home/heike/git/hzdhackathon/zentralkomponente/hackathon.db" type="dev"/>
+	</data-source>
+	<filters/>
+</data-sources>
