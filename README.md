@@ -53,4 +53,4 @@ Neben den anderen Einstellungen, die nicht geändert werden dürfen gibt es 2 fa
 | centProSekunde | Ganzzahl | Anzahl ct, um die sich der Preis eines Bildes je Sekunde Betrachtungsdauer erhöht | 5
 | anfangspreisEuro | Ganzzahl | Startpreis in Euro | 100
 
-Zum Ändern der Prameter muss der service gestopt und nach dem ändern neu gestartet werden. Da Daten nicht Persistiert werden, gehen sie dabei verloren.
+Zum Ändern der Prameter muss der service gestopt und nach dem Ändern neu gestartet werden. Da Daten nicht persistiert werden, gehen sie dabei verloren.
