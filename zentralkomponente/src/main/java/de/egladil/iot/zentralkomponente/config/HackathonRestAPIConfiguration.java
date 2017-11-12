@@ -12,7 +12,9 @@ import io.dropwizard.Configuration;
  */
 public class HackathonRestAPIConfiguration extends Configuration {
 
-	private String dburl;
+	private int centProSekunde;
+
+	private int anfangspreisEuro;
 
 	/**
 	 * HackathonRestAPIConfiguration
@@ -20,8 +22,22 @@ public class HackathonRestAPIConfiguration extends Configuration {
 	public HackathonRestAPIConfiguration() {
 	}
 
-	public final String getDburl() {
-		return dburl;
+	public final int getCentProSekunde() {
+		return centProSekunde;
 	}
 
+	public final int getAnfangspreisEuro() {
+		return anfangspreisEuro;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("HackathonRestAPIConfiguration [centProSekunde=");
+		builder.append(centProSekunde);
+		builder.append(", anfangspreisEuro=");
+		builder.append(anfangspreisEuro);
+		builder.append("]");
+		return builder.toString();
+	}
 }

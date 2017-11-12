@@ -1,13 +1,14 @@
 package de.egladil.iot.zentralkomponente;
 
-import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sqlite.javax.SQLiteConnectionPoolDataSource;
 
 import de.egladil.iot.zentralkomponente.config.HackathonRestAPIConfiguration;
+import de.egladil.iot.zentralkomponente.dao.BildSensorRegistry;
 import de.egladil.iot.zentralkomponente.health.PingHealthCheck;
+import de.egladil.iot.zentralkomponente.resources.BildResource;
 import de.egladil.iot.zentralkomponente.resources.PingResource;
+import de.egladil.iot.zentralkomponente.resources.ReportResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 
@@ -35,9 +36,7 @@ public class HackathonRestAPI extends Application<HackathonRestAPIConfiguration>
 	@Override
 	public void run(final HackathonRestAPIConfiguration configuration, final Environment environment) throws Exception {
 
-		final SQLiteConnectionPoolDataSource ds = new SQLiteConnectionPoolDataSource();
-		ds.setUrl(configuration.getDburl());
-		final DBI jdbi = new DBI(ds);
+		LOG.info("Starten Rest-API mit {}", configuration);
 
 		final PingResource pingResource = new PingResource();
 		environment.jersey().register(pingResource);
@@ -45,6 +44,12 @@ public class HackathonRestAPI extends Application<HackathonRestAPIConfiguration>
 		final PingHealthCheck pingHealthCheck = new PingHealthCheck(pingResource);
 		environment.healthChecks().register("PingResource", pingHealthCheck);
 
+		final BildSensorRegistry bildRegistry = new BildSensorRegistry(configuration.getAnfangspreisEuro());
+		final BildResource bildResource = new BildResource(bildRegistry, configuration.getCentProSekunde());
+		environment.jersey().register(bildResource);
+
+		final ReportResource reportResource = new ReportResource(bildRegistry, configuration.getCentProSekunde());
+		environment.jersey().register(reportResource);
 	}
 
 	@Override

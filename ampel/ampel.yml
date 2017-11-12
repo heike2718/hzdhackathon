@@ -1,17 +1,17 @@
+preis1: 300
+preis2: 1000
 
-centProSekunde: 5
-anfangspreisEuro: 100
 
 server:
-  applicationContextPath: /hackrest
-  adminContextPath: /hackrestadmin
+  applicationContextPath: /ampelapi
+  adminContextPath: /ampeladmin
   registerDefaultExceptionMappers: false
   applicationConnectors:
   - type: http
-    port: 9200
+    port: 9300
   adminConnectors:
   - type: http
-    port: 9201
+    port: 9301
 logging:
   level: INFO
   # Logger-specific levels.
@@ -29,10 +29,10 @@ logging:
 #      logFormat: "%-6level [%d{yyyy-MM-dd HH:mm:ss.SSS, Europe/Berlin}] [%t] %logger{26} - %X{code} %msg %n"
 #      logFormat: "[%-5level] %d{yyyy-MM-dd HH:mm:ss,SSS} [%file:%line] %msg%n"
     - type: file
-      currentLogFilename: /home/heike/temp/log/zentralkomponente.log
+      currentLogFilename: /home/heike/temp/log/ampel.log
       threshold: ALL
       archive: true
-      archivedLogFilenamePattern: /home/heike/temp/log/zentralkomponente-%i.log
+      archivedLogFilenamePattern: /home/heike/temp/log/ampel-%i.log
       archivedFileCount: 5
       timeZone: Europe/Berlin
       maxFileSize: 10MB
