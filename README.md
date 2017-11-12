@@ -45,7 +45,7 @@ service hackathon stop
 Die Konfiguration erfolgt in der Datei 
 /home/pi/microservices/hackathon/hackathon.yml.
 
-Neben dem anderen Einstellungen, die nicht geändert werden dürfen gibt es 2 fachliche Konfigurationsparameter für die Schnittstelle:
+Neben den anderen Einstellungen, die nicht geändert werden dürfen gibt es 2 fachliche Konfigurationsparameter für die Schnittstelle:
 (bitte nur den Wert ändern, auf keinen Fall den Namen!)
 
 | Parametername | Datentyp | Bedeutung | default |
