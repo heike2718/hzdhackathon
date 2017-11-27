@@ -1,0 +1,8 @@
+[Unit]
+Description=Hackathon REST API
+[Service]
+ExecStart=/home/pi/microservices/hackathon/run.sh
+User=pi
+Type=simple
+[Install]
+WantedBy=multi-user.target

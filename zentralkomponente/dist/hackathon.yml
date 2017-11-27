@@ -1,0 +1,39 @@
+
+dburl: jdbc:sqlite:hackathon.db
+centProSekunde: 5
+
+server:
+  applicationContextPath: /hackrest
+  adminContextPath: /hackrest
+  registerDefaultExceptionMappers: false
+  applicationConnectors:
+  - type: http
+    port: 9200
+  adminConnectors:
+  - type: http
+    port: 9201
+logging:
+  level: INFO
+  # Logger-specific levels.
+  #loggers:
+
+  # Sets the level for 'org.hibernate.SQL' to DEBUG.
+  #org.hibernate.SQL: DEBUG
+
+  appenders:
+    - type: console
+      threshold: ALL
+      timeZone: Europe/Berlin
+      target: stdout
+      logFormat: "%-4r %d{yyyy-MM-dd HH:mm:ss.SSS, Europe/Berlin} %-5level [%t] %logger{26} %msg%n"
+#      logFormat: "%-6level [%d{yyyy-MM-dd HH:mm:ss.SSS, Europe/Berlin}] [%t] %logger{26} - %X{code} %msg %n"
+#      logFormat: "[%-5level] %d{yyyy-MM-dd HH:mm:ss,SSS} [%file:%line] %msg%n"
+    - type: file
+      currentLogFilename: /home/pi/microservices/hackathon/log/zentralkomponente.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: /home/pi/microservices/hackathon/log/zentralkomponente-%i.log
+      archivedFileCount: 5
+      timeZone: Europe/Berlin
+      maxFileSize: 10MB
+      logFormat: "%-4r %d{yyyy-MM-dd HH:mm:ss.SSS, Europe/Berlin} %-5level [X:%X{csrf} U:%X{username}] [%t] %logger{26} %msg%n"
