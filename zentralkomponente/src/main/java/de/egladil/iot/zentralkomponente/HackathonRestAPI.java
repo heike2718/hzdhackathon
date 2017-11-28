@@ -38,6 +38,8 @@ public class HackathonRestAPI extends Application<HackathonRestAPIConfiguration>
 
 		LOG.info("Starten Rest-API mit {}", configuration);
 
+//		configureCors(configuration, environment);
+
 		final PingResource pingResource = new PingResource();
 		environment.jersey().register(pingResource);
 
@@ -51,6 +53,18 @@ public class HackathonRestAPI extends Application<HackathonRestAPIConfiguration>
 		final ReportResource reportResource = new ReportResource(bildRegistry, configuration.getCentProSekunde());
 		environment.jersey().register(reportResource);
 	}
+
+//	private void configureCors(final HackathonRestAPIConfiguration configuration, final Environment environment) {
+//		// ab Dropwizard 0.8.1 erforderlich
+//		System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
+//		final FilterRegistration.Dynamic filter = environment.servlets().addFilter("CORSFilter", CrossOriginFilter.class);
+//
+//		filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "OPTIONS,GET,PUT,POST,DELETE,HEAD");
+//
+//		// Add URL mapping
+//		// FIXME: secure?
+//		filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+//	}
 
 	@Override
 	public String getName() {

@@ -31,6 +31,8 @@ public class ReportResource {
 
 	private final Preisservice preisservice;
 
+	private int requestCount = 0;
+
 	/**
 	 * ReportResource
 	 */
@@ -41,20 +43,26 @@ public class ReportResource {
 	}
 
 	@GET
-	@Produces(MediaType.TEXT_HTML + "; charset=utf-8")
+	@Produces(MediaType.TEXT_PLAIN + "; charset=utf-8")
 	public Response getReport() {
+		this.requestCount++;
 		final String datumUhrzeit = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN).format(System.currentTimeMillis());
 
 		final List<String> namen = registry.getBildnamen();
 		final StringBuffer sb = new StringBuffer();
-		sb.append("&lt;html&gt;&lt;body&gt;&lt;h2&gt;Preisliste&lt;/h2&gt;&lt;h3&gt;");
-		sb.append(datumUhrzeit);
+		sb.append("Preisliste (");
+		sb.append(this.requestCount);
+		sb.append(")\n");
+		sb.append("-------------------------------------------\n\n");
 
-		sb.append("&lt;/h3&gt;&lt;table&gt;");
+		// sb.append("&lt;html&gt;&lt;body&gt;&lt;h2&gt;Preisliste&lt;/h2&gt;&lt;h3&gt;");
+		// sb.append(datumUhrzeit);
+
+		// sb.append("&lt;/h3&gt;&lt;table&gt;");
 		for (final String name : namen) {
 			appendZeileFuerSensor(sb, name);
 		}
-		sb.append("&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;");
+		// sb.append("&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;");
 		return Response.ok().entity(sb.toString()).build();
 	}
 
@@ -71,10 +79,12 @@ public class ReportResource {
 
 	private void appendZeileFuerSensor(final StringBuffer sb, final String name) {
 		final String preisInEuro = preisservice.berechneNeuenPreis(name, registry, centProSekunde);
-		sb.append("&lt;tr&gt;&lt;td&gt;");
+		// sb.append("&lt;tr&gt;&lt;td&gt;");
 		sb.append(name);
-		sb.append("&lt;/td&gt;&lt;td&gt;");
+		// sb.append("&lt;/td&gt;&lt;td&gt;");
+		sb.append(":          ");
 		sb.append(preisInEuro);
-		sb.append("&lt;/td&gt;&lt;/tr&gt;");
+		// sb.append("&lt;/td&gt;&lt;/tr&gt;");
+		sb.append(" EURO\n");
 	}
 }

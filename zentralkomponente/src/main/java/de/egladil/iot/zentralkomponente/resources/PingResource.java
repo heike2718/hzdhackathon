@@ -20,7 +20,6 @@ import com.codahale.metrics.annotation.Timed;
  */
 @Path("/ping")
 @Produces(MediaType.TEXT_PLAIN + "; charset=utf-8")
-// @Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_HTML })
 public class PingResource {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PingResource.class);

@@ -22,7 +22,6 @@ import de.egladil.iot.zentralkomponente.payload.Bildsensor;
 /**
  * BildResource
  */
-@Consumes(MediaType.APPLICATION_JSON + "; charset=utf-8")
 @Path("/bild")
 public class BildResource {
 
@@ -44,6 +43,7 @@ public class BildResource {
 
 	@POST
 	@Produces(MediaType.TEXT_PLAIN + "; charset=utf-8")
+	@Consumes(MediaType.APPLICATION_JSON + "; charset=utf-8")
 	public Response verarbeiteDaten(final Bildsensor sensor) {
 		if (sensor == null) {
 			return Response.status(Status.BAD_REQUEST).entity("payload darf nicht null sein").build();
