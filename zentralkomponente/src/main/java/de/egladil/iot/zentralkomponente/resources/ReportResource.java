@@ -43,18 +43,20 @@ public class ReportResource {
 	}
 
 	@GET
-	@Produces(MediaType.TEXT_PLAIN + "; charset=utf-8")
+	@Produces(MediaType.TEXT_HTML + "; charset=utf-8")
 	public Response getReport() {
 		this.requestCount++;
 		final String datumUhrzeit = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN).format(System.currentTimeMillis());
 
 		final List<String> namen = registry.getBildnamen();
 		final StringBuffer sb = new StringBuffer();
-		sb.append("Preisliste (");
+		// sb.append("Preisliste (");
+		// sb.append(this.requestCount);
+		// sb.append(")\n");
+		// sb.append("-------------------------------------------\n\n");
+		sb.append("<html><body><h2>Preisliste</h2><h3>Abfrage Nummer ");
 		sb.append(this.requestCount);
-		sb.append(")\n");
-		sb.append("-------------------------------------------\n\n");
-
+		sb.append("</h3><table>");
 		// sb.append("&lt;html&gt;&lt;body&gt;&lt;h2&gt;Preisliste&lt;/h2&gt;&lt;h3&gt;");
 		// sb.append(datumUhrzeit);
 
@@ -62,7 +64,7 @@ public class ReportResource {
 		for (final String name : namen) {
 			appendZeileFuerSensor(sb, name);
 		}
-		// sb.append("&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;");
+		sb.append("</table></body></html>");
 		return Response.ok().entity(sb.toString()).build();
 	}
 
@@ -79,12 +81,13 @@ public class ReportResource {
 
 	private void appendZeileFuerSensor(final StringBuffer sb, final String name) {
 		final String preisInEuro = preisservice.berechneNeuenPreis(name, registry, centProSekunde);
-		// sb.append("&lt;tr&gt;&lt;td&gt;");
+		sb.append("<tr><td>");
 		sb.append(name);
-		// sb.append("&lt;/td&gt;&lt;td&gt;");
-		sb.append(":          ");
+		sb.append(": ");
+		sb.append("</td><td>");
 		sb.append(preisInEuro);
-		// sb.append("&lt;/td&gt;&lt;/tr&gt;");
-		sb.append(" EURO\n");
+		sb.append(" EURO");
+		sb.append("</td></tr>");
+
 	}
 }
